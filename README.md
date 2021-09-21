@@ -1,9 +1,10 @@
-<<<<<<< HEAD
-# JWT-Auth-Front-VueJs
+# Login-JWT-VueJs
 
 **Visão Geral do Projeto**
 
 Boilerplate de uma tela de autenticação com JWT desenvolvido com Vue, Vuex, Vue-Router e Axios
+
+api: https://github.com/emersonv25/JWT-Auth-Api-AspNetCore5
 
 ### Padrão de Projeto
 
@@ -53,33 +54,5 @@ Editar a url das apis dentro do arquivo
 
 }
 
-```
-# Configurando a url base da aplicação
-É necessário configurar a url base em dois arquivos:
-
-> vue.config.js
-```
-module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-  ? '/' // Rota base em produção ex: '/sistema/web/'
-  : '/', // Rota base em desenvolvimento
-  transpileDependencies: [
-    'vuetify'
-  ]
-}
-
-```
-> src/router/index.js
-```
-const router = new VueRouter({
-  //mode: 'history', // descomentar para ativar o modo histórico do navegador (necessário configuração adicional no servidor)
-  //base: "portal", // rota base, descomentar e editar caso não for a raiz
-  routes
-})
-```
 
 
-=======
-# Login-JWT-VueJs
-Boilerplate de uma tela de autenticação com JWT desenvolvido com Vue, Vuex, Vue-Router e se comunicando com uma webapi via Axios
->>>>>>> 7b4f0fd015781b9b514a3ab612c63835c3f8adb5
