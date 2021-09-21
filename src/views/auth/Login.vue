@@ -1,0 +1,136 @@
+<template>
+  <v-card
+    class="mx-auto my-12"
+    max-width="360"
+    :loading="isLoading"
+    style="margin-top: 150px !important"
+  >
+    <v-container>
+      <v-row style="margin: 5%">
+        <v-flex style="display: flex; justify-content: center">
+          <v-img max-width="50%" src="@/assets/logo.png"></v-img>
+        </v-flex>
+      </v-row>
+      <v-row v-if="isLoading">
+        <v-col>
+          <div class="text-center">
+            <v-progress-circular
+              size="50"
+              color="primary"
+              indeterminate
+            ></v-progress-circular>
+            <v-alert
+              icon="mdi-shield-lock-outline"
+              prominent
+              text
+              type="info"
+              style="margin-top: 20px"
+            >
+              Autenticando... Por favor, aguarde !
+            </v-alert>
+          </div>
+        </v-col>
+      </v-row>
+      <v-row style="margin: 5%" v-if="!isLoading">
+        <v-col>
+          <v-form
+            ref="formLogin"
+            class="login"
+            @submit.prevent="login"
+            v-model="formValid"
+          >
+            <v-text-field
+              v-model="usuario"
+              id="usuario"
+              name="usuario"
+              label="Usuário"
+              prepend-icon="mdi-account"
+              :rules="rules.usuario"
+              required
+              outlined
+              dense
+            ></v-text-field>
+
+            <v-text-field
+              v-model="senha"
+              id="senha"
+              label="Senha"
+              name="senha"
+              prepend-icon="mdi-lock"
+              type="password"
+              :rules="rules.senha"
+              required
+              outlined
+              dense
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-alert v-if="isError" dense outlined type="error">
+              <div v-if="errorMsg != ''">
+                {{ errorMsg }}
+              </div>
+              <div v-else>Usuário ou senha inválidos !</div>
+            </v-alert>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" large type="submit">
+                <v-icon left> mdi-login </v-icon>
+                Entrar
+              </v-btn>
+            </v-card-actions>
+          </v-form>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+export default {
+  name: "Login",
+  data() {
+    return {
+      usuario: "",
+      senha: "",
+      formValid: false,
+      rules: {
+        usuario: [(value) => !!value || "Digite seu usuário."],
+        senha: [(value) => !!value || "Digite sua senha."],
+      },
+    };
+  },
+  computed: {
+    isError: function () {
+      if (this.$store.getters.authStatus == "error") {
+        return true;
+      }
+      return false;
+    },
+    isLoading: function () {
+      if (this.$store.getters.authStatus == "loading") {
+        return true;
+      }
+      return false;
+    },
+    ...mapGetters(["errorMsg"]),
+  },
+  methods: {
+    login: function () {
+      if (this.formValid) {
+        this.$store.commit("remove_msg");
+        let usuario = this.usuario;
+        let senha = this.senha;
+        this.$store
+          .dispatch("login", { usuario, senha })
+          .then(() => this.$router.push("/"))
+          .catch(this.senha = "");
+      } else {
+        this.$refs.formLogin.validate();
+      }
+    },
+  },
+  beforeMount() {
+    //this.$store.dispatch('autenticar').then(() => this.$router.push('/'))  
+  },
+};
+</script>
