@@ -114,8 +114,15 @@ export default {
     },
     async atualizar(usuario){
       this.loadingAtualizar = true;
-      await this.$store.dispatch("atualizar", usuario)
+      try {
+        await this.$store.dispatch("editar", usuario)
+      } catch (error) {
+        console.log(error)
+      }
+      
+      await this.$store.dispatch("getUsuarios");
       this.loadingAtualizar = false;
+      this.dialogEditar = false;
     }
 
   },
