@@ -38,6 +38,7 @@ export default new Vuex.Store({
       state.loading = false
       state.errorMsg = ''
       state.successMsg = ''
+      state.authStatus = ''
     },
   },
 

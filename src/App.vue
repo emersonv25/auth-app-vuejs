@@ -3,7 +3,7 @@
     <Navbar/>
     <v-main>
       <v-container>
-        <Alert :msg="errorMsg" :tipo="'error'" v-show="errorMsg != ''" v-if="this.$route.name != 'Login'"></Alert>
+        <Alert :msg="errorMsg" :tipo="'error'" v-show="errorMsg != ''" v-if="this.$route.name != 'Login' && this.$route.name != 'Registro'"></Alert>
         <Alert :msg="successMsg" :tipo="'success'" v-show="successMsg != ''"></Alert>
         <v-progress-linear indeterminate color="primary" v-if="isLoading == true"></v-progress-linear>
         <v-row>

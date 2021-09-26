@@ -8,6 +8,14 @@ export default [
         }
       },
       {
+        path: '/register',
+        name: 'Registro',
+        component: () => import('../views/auth/Register'),
+        meta: {
+          guest: true
+        }
+      },
+      {
         path: '/admin',
         name: 'Admin',
         component: () => import('../views/admin/Admin'),

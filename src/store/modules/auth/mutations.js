@@ -1,9 +1,5 @@
 export default {
-  auth_request(state) {
-      state.authStatus = 'loading'
-    },
-    auth_sucess(state, {token, usuario}){
-      state.authStatus = 'sucess'
+    auth_success(state, {token, usuario}){
       state.token = token
       state.usuario = usuario
     },
@@ -12,7 +8,4 @@ export default {
       state.usuario = {}
       state.token = ''
     },
-    auth_error(state){
-      state.authStatus = 'error'
-    }
 }

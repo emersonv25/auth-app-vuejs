@@ -64,16 +64,17 @@
               dense
             ></v-text-field>
             <v-spacer></v-spacer>
-            <v-alert v-if="isError" dense outlined type="error">
-              <div v-if="errorMsg != ''">
+            <v-alert v-if="errorMsg != ''" dense outlined type="error">
+              <div>
                 {{ errorMsg }}
               </div>
-              <div v-else>Usuário ou senha inválidos !</div>
             </v-alert>
             <v-card-actions>
+              <v-btn color="primary" text to="/register">
+                Criar conta
+              </v-btn>
               <v-spacer></v-spacer>
               <v-btn color="primary" large type="submit">
-                <v-icon left> mdi-login </v-icon>
                 Entrar
               </v-btn>
             </v-card-actions>
@@ -100,19 +101,9 @@ export default {
     };
   },
   computed: {
-    isError: function () {
-      if (this.$store.getters.authStatus == "error") {
-        return true;
-      }
-      return false;
-    },
-    isLoading: function () {
-      if (this.$store.getters.authStatus == "loading") {
-        return true;
-      }
-      return false;
-    },
-    ...mapGetters(["errorMsg"]),
+    ...mapGetters(['errorMsg']),
+    ...mapGetters(['successMsg']),
+    ...mapGetters(['isLoading']),
   },
   methods: {
     login: function () {

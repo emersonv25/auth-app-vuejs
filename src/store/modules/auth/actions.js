@@ -4,8 +4,8 @@ const uri = api.url;
 
 export default{
     login({commit}, {usuario, senha}){
+        commit("loading", true)
         return new Promise((resolve, reject) => {
-          commit('auth_request')
           axios({url: uri+'Auth/login', data: {username: usuario, password: senha} , method: 'POST' })
           .then(resp => {
             if(resp.data.token != '' && resp.data.token != null){
@@ -14,11 +14,11 @@ export default{
               localStorage.setItem('token', token)
               localStorage.setItem('user', JSON.stringify(usuario))
               axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-              commit('auth_sucess', {token, usuario})
+              commit('auth_success', {token, usuario})
+              commit("loading", false)
               resolve(resp)
             }
             else{
-              commit('auth_error')
               commit('error_msg', "Falha na conexão")
               localStorage.removeItem('token')
               localStorage.removeItem('user')
@@ -26,7 +26,6 @@ export default{
             
           })
           .catch(err => {
-            commit('auth_error')
             commit('error_msg', err.response.data.error)
             localStorage.removeItem('token')
             localStorage.removeItem('user')
@@ -52,4 +51,17 @@ export default{
         })
       })
     },
+    register({commit}, payload){
+      commit("loading", true)
+      return new Promise((resolve, reject) =>{
+        axios.post(uri + 'Auth/cadastrar', {username: payload.usuario,nome: payload.nome, password: payload.senha, email: payload.email})
+        .then(resp => {
+          commit("success_msg", "Cadastro realizado com successo !")
+          resolve(resp)
+        }).catch(err => {
+          commit('error_msg', err.response.data.error)
+          reject(err)
+        })
+      })
+    }
 }
