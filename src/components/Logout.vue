@@ -13,7 +13,6 @@
 
 
 <script>
-import axios from 'axios'
 export default {
     name: 'Logout',
     computed: {
@@ -21,10 +20,8 @@ export default {
     },
     methods: {
       async logout () {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
         await this.$store.commit('logout')
-        await delete axios.defaults.headers.common['Authorization']
+        await this.$store.commit('remove_msg')
         this.$router.push('/login')
       }
     },

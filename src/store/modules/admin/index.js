@@ -25,6 +25,18 @@ export default {
                     reject(err)
                 })
             })
+        },
+        deletar({ commit }, id) {
+            commit("clear_admin_msg")
+            return new Promise((resolve, reject) => {
+                axios({url: url+'Auth/admin/deletar?id=' + id, method: 'DELETE' }).then(resp => {
+                    commit('success_msg', resp.data.message)
+                    resolve(resp)
+                }).catch(err => {   
+                    commit('error_msg', err.response.data.error)
+                    reject(err)
+                })
+            })
         }
 
     },

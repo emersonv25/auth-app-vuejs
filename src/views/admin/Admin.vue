@@ -31,14 +31,14 @@
         </v-chip>
       </template>
     </v-data-table>
-    <!-- Dialogo ativar/desativar usuario  !-->
+
     <v-dialog
       v-model="dialogEditar"
       max-width="480"
       :key="usuarioEditar.usuario"
       persistent
     >
-      <v-card class="text-center" :loading="loadingAtualizar">
+      <v-card class="text-center" :loading="loadingsalvar">
         <v-card-text class="headline font-weight-bold" style="padding-top: 10px"
           >Editar Usuário ID: {{usuarioEditar.id}}
         </v-card-text>
@@ -50,24 +50,55 @@
             <v-select label="Ativo" outlined v-model="usuarioEditar.ativo" :items="[0,1]"></v-select>
         </v-card-text>
         <v-card-actions>
-          <div class="text-center">
-            <v-btn
-              class="ma-2"
-              outlined
-              color="gray"
-              @click="dialogEditar = false"
-            >
-              Cancelar
+
+          <v-btn text color="error" small @click="dialogExcluir = true">
+            Exluir Usuário
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn
+            class="ma-2"
+            outlined
+            color="gray"
+            @click="dialogEditar = false"
+          >
+            Cancelar
+          </v-btn>
+          <v-btn
+            class="ma-2"
+            outlined
+            color="success"
+            @click="salvar(usuarioEditar)"
+          >
+            Salvar
+          </v-btn>
+
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+
+    <v-dialog
+      v-model="dialogExcluir"
+      max-width="480"
+      :key="usuarioEditar.id"
+    >
+      <v-card class="text-center" :loading="loadingExcluir">
+        <v-card-title>Confirmar Exclusão</v-card-title>
+        <v-card-text>Tem certeza que deseja deletar permanentemente esté usuário ?</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            class="ma-2"
+            outlined
+            color="gray"
+            @click="dialogExcluir= false"
+          >
+            Cancelar
+          </v-btn>
+            <v-btn text color="error" @click="excluir(usuarioEditar.id)">
+              Deletar
             </v-btn>
-            <v-btn
-              class="ma-2"
-              outlined
-              color="success"
-              @click="atualizar(usuarioEditar)"
-            >
-              Salvar
-            </v-btn>
-          </div>
+
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -83,7 +114,9 @@ export default {
       loading: false,
       loadingTable: false,
       dialogEditar: false,
-      loadingAtualizar: false,
+      dialogExcluir: false,
+      loadingExcluir: false,
+      loadingsalvar: false,
       usuarioEditar: { username: "", nome: "", cargo: '', email: '', ativo: 0, id: '' },
       search: "",
       nome: "",
@@ -112,8 +145,17 @@ export default {
       this.usuarioEditar.email = email;
       this.usuarioEditar.id = id;
     },
-    async atualizar(usuario){
-      this.loadingAtualizar = true;
+    async excluir(id) {
+      this.loadingExcluir = true
+      await this.$store.dispatch("deletar", id)
+      await this.$store.dispatch("getUsuarios");
+      this.loadingExcluir = false
+      this.dialogExcluir = false
+      this.dialogEditar = false
+      
+    },
+    async salvar(usuario){
+      this.loadingsalvar = true;
       try {
         await this.$store.dispatch("editar", usuario)
       } catch (error) {
@@ -121,7 +163,7 @@ export default {
       }
       
       await this.$store.dispatch("getUsuarios");
-      this.loadingAtualizar = false;
+      this.loadingsalvar = false;
       this.dialogEditar = false;
     }
 
