@@ -3,27 +3,20 @@ const api = require('@/api.json');
 const uri = api.url;
 
 export default{
-    login({commit}, {usuario, senha}){
+    login({commit}, payload){
         commit("loading", true)
         return new Promise((resolve, reject) => {
-          axios({url: uri+'Auth/login', data: {username: usuario, password: senha} , method: 'POST' })
+          axios({url: uri+'Auth/login', data: {username: payload.usuario, password: payload.senha} , method: 'POST' })
           .then(resp => {
-            if(resp.data.token != '' && resp.data.token != null){
-              const token = resp.data.token
-              const usuario = resp.data.usuario
-              localStorage.setItem('token', token)
-              localStorage.setItem('user', JSON.stringify(usuario))
-              axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-              commit('auth_success', {token, usuario})
-              commit("loading", false)
-              resolve(resp)
-            }
-            else{
-              commit('error_msg', "Falha na conexão")
-              localStorage.removeItem('token')
-              localStorage.removeItem('user')
-            }
-            
+            const token = resp.data.token
+            const usuario = resp.data.usuario
+            localStorage.setItem('token', token)
+            localStorage.setItem('user', JSON.stringify(usuario))
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+            commit('auth_success', {token, usuario})
+            commit("loading", false)
+            resolve(resp)
+                      
           })
           .catch(err => {
             commit('error_msg', err.response.data.error)
@@ -33,23 +26,11 @@ export default{
           })
         })
     },
-    logout({commit}, usuario){
-      return new Promise((resolve, reject) => {
-        axios.post(uri + 'logout/', usuario).then(resp =>{
-          commit('logout')
-          localStorage.removeItem('token')
-          localStorage.removeItem('user')
-          delete axios.defaults.headers.common['Authorization']
-          resolve(resp)
-        }).catch(err => {
-          commit('logout')
-          commit('error_msg', 'Falha na conexão')
-          localStorage.removeItem('token')
-          localStorage.removeItem('user')
-          delete axios.defaults.headers.common['Authorization']
-          reject(err)
-        })
-      })
+    logout({commit}){
+      commit('logout')
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      delete axios.defaults.headers.common['Authorization']
     },
     register({commit}, payload){
       commit("loading", true)
