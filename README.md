@@ -4,7 +4,7 @@
 
 Boilerplate de uma tela de autenticação com JWT desenvolvido com Vue, Vuex, Vue-Router e Axios
 
-api: https://github.com/emersonv25/JWT-Auth-Api-AspNetCore5
+api: https://github.com/emersonv25/Login-JWT-Api-AspNetCore5
 
 ### Padrão de Projeto
 
