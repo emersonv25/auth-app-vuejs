@@ -21,6 +21,8 @@ export default {
     methods: {
       async logout () {
         await this.$store.commit('logout')
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
         await this.$store.commit('remove_msg')
         this.$router.push('/login')
       }

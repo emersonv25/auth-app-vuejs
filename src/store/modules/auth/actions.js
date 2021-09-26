@@ -27,10 +27,8 @@ export default{
         })
     },
     logout({commit}){
-      commit('logout')
-      localStorage.removeItem('token')
-      localStorage.removeItem('user')
       delete axios.defaults.headers.common['Authorization']
+      commit('logout')
     },
     register({commit}, payload){
       commit("loading", true)
