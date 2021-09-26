@@ -62,6 +62,23 @@
         </v-list-item>
         <Logout />
         <v-divider></v-divider>
+        <v-list >
+          <v-list-item-group>
+            <v-list-item to="/">
+              <v-icon>mdi-home</v-icon>
+              <v-list-item-content style="margin-left: 15px">
+                <v-list-item-content>Início</v-list-item-content>
+              </v-list-item-content>
+            </v-list-item>
+            <v-subheader>Usuário</v-subheader>
+            <v-list-item to="/perfil">
+              <v-icon>mdi-card-account-details</v-icon>
+              <v-list-item-content style="margin-left: 15px">
+                <v-list-item-content>Meu Perfil</v-list-item-content>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
         <v-list v-if="isAdmin">
           <v-subheader>Administrador</v-subheader>
           <v-list-item-group v-for="(item, i) in itemsAdm" :key="i">

@@ -1,9 +1,42 @@
 <template>
-    <div>
-        BEMVINDO
-        {{usuario}}
-        
-    </div>
+<v-container>
+  <v-row>
+    <v-col>
+      <v-card
+        class="mx-auto"
+        max-width="344"
+        outlined
+      >
+        <v-list-item three-line to="/perfil">
+          <v-list-item-content>
+            <v-list-item-title class="text-h5"> 
+              Meu Perfil
+            </v-list-item-title>
+            <v-list-item-subtitle>Edite as informações da sua conta</v-list-item-subtitle>
+          </v-list-item-content>
+          <v-icon x-large>mdi-card-account-details</v-icon>
+        </v-list-item>
+      </v-card>
+    </v-col>
+    <v-col>
+      <v-card       
+        class="mx-auto"
+        max-width="344"
+        outlined>
+        <v-list-item three-line to="/admin" v-if="isAdmin">
+          <v-list-item-content>
+            <v-list-item-title class="text-h5"> 
+              Gerenciar Usuários
+            </v-list-item-title>
+            <v-list-item-subtitle>Gerencie os usuários cadastrados no sistema</v-list-item-subtitle>
+          </v-list-item-content>
+          <v-icon x-large>mdi-shield-lock-outline</v-icon>
+        </v-list-item>      
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
+
 </template>
 
 <script>
@@ -15,10 +48,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["usuario"]),
-    ...mapGetters(["isLoggedIn"]),
     ...mapGetters(["isAdmin"]),
-    //isAdmin : function() {return this.$store.getters.isAdmin}
   },
 };
 </script>

@@ -31,4 +31,12 @@ export default [
           requiresAuth: true
         }
       },
+      {
+        path: '/perfil',
+        name: 'Perfil',
+        component: () => import('../views/auth/Perfil'),
+        meta: {
+          requiresAuth: true
+        }
+      },
 ]
