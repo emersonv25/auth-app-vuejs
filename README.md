@@ -2,7 +2,7 @@
 
 ## Visão Geral do Projeto
 
-Um sistema de autenticação com Json Web Token desenvolvido com o Vue, Vuex, Vue-Router e Axios
+Um sistema de autenticação com Json Web Token desenvolvido com o Vue, Vuex, Vue-Router, Vuetify e Axios
 
 api: https://github.com/emersonv25/Login-JWT-Api-AspNetCore5
 
