@@ -45,8 +45,8 @@
               dense
             ></v-text-field>
             <v-text-field
-              v-model="usuario"
-              id="usuario"
+              v-model="username"
+              id="username"
               label="Nome de Usuário"
               :rules="rules.usuario"
               required
@@ -113,7 +113,7 @@ export default {
   data() {
     return {
         nome:"",
-        usuario: "",
+        username: "",
         email: "",
         senha: "",
         confirmarSenha: "",
@@ -141,10 +141,10 @@ export default {
         this.$store.commit("remove_msg");
         let nome = this.nome;
         let email = this.email;
-        let usuario = this.usuario;
+        let username = this.username;
         let senha = this.senha;
         await this.$store
-            .dispatch("register", { nome, usuario, email, senha })
+            .dispatch("register", { nome, username, email, senha })
             .then(() => this.$router.push("/login"))
       } else {
         this.$refs.formRegister.validate();

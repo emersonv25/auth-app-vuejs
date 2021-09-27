@@ -63,18 +63,11 @@
         <Logout />
         <v-divider></v-divider>
         <v-list >
-          <v-list-item-group>
-            <v-list-item to="/">
-              <v-icon>mdi-home</v-icon>
+          <v-list-item-group v-for="(item, i) in items" :key="i">
+            <v-list-item :to="item.rota">
+              <v-icon>{{ item.icon }}</v-icon>
               <v-list-item-content style="margin-left: 15px">
-                <v-list-item-content>Início</v-list-item-content>
-              </v-list-item-content>
-            </v-list-item>
-            <v-subheader>Usuário</v-subheader>
-            <v-list-item to="/perfil">
-              <v-icon>mdi-card-account-details</v-icon>
-              <v-list-item-content style="margin-left: 15px">
-                <v-list-item-content>Meu Perfil</v-list-item-content>
+                <v-list-item-content>{{ item.title }}</v-list-item-content>
               </v-list-item-content>
             </v-list-item>
           </v-list-item-group>
@@ -112,6 +105,18 @@ export default {
       right: null,
       drawer: true,
       versao: version,
+      items: [
+        {
+          title: "Início",
+          icon: "mdi-home",
+          rota: "/",
+        },
+        {
+          title: "Meu Perfil",
+          icon: "mdi-card-account-details",
+          rota: "/perfil",
+        },
+      ],
       itemsAdm: [
         {
           title: "Gerenciar Usuários",

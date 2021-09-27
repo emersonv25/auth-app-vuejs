@@ -8,4 +8,7 @@ export default {
       state.usuario = {}
       state.token = ''
     },
+    set_usuario(state, usuario){
+      state.usuario = usuario
+    }
 }

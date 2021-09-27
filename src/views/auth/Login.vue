@@ -40,10 +40,10 @@
             v-model="formValid"
           >
             <v-text-field
-              v-model="usuario"
-              id="usuario"
+              v-model="username"
+              id="username"
               name="usuario"
-              label="Usuário"
+              label="Nome de Usuário"
               prepend-icon="mdi-account"
               :rules="rules.usuario"
               required
@@ -91,7 +91,7 @@ export default {
   name: "Login",
   data() {
     return {
-      usuario: "",
+      username: "",
       senha: "",
       formValid: false,
       rules: {
@@ -109,10 +109,10 @@ export default {
     login: function () {
       if (this.formValid) {
         this.$store.commit("remove_msg");
-        let usuario = this.usuario;
+        let username = this.username;
         let senha = this.senha;
         this.$store
-          .dispatch("login", { usuario, senha })
+          .dispatch("login", { username, senha })
           .then(() => this.$router.push("/"))
           .catch(this.senha = "");
       } else {

@@ -1,6 +1,16 @@
 <template>
 <v-container>
   <v-row>
+    <v-col cols="12">
+      <div class="text-center">
+        <v-avatar color="dark">
+          <v-icon x-large>
+            mdi-account-circle
+          </v-icon>
+        </v-avatar>        
+      </div>
+      <v-card-title class="justify-center">Bem Vindo, {{usuario.nome}}</v-card-title>
+    </v-col>
     <v-col>
       <v-card
         class="mx-auto"
@@ -18,12 +28,12 @@
         </v-list-item>
       </v-card>
     </v-col>
-    <v-col>
+    <v-col v-if="isAdmin">
       <v-card       
         class="mx-auto"
         max-width="344"
         outlined>
-        <v-list-item three-line to="/admin" v-if="isAdmin">
+        <v-list-item three-line to="/admin">
           <v-list-item-content>
             <v-list-item-title class="text-h5"> 
               Gerenciar Usuários
@@ -49,6 +59,7 @@ export default {
   },
   computed: {
     ...mapGetters(["isAdmin"]),
+    ...mapGetters(["usuario"]),
   },
 };
 </script>
