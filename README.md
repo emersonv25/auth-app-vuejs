@@ -1,17 +1,48 @@
 # Login-JWT-VueJs
 
-**Visão Geral do Projeto**
+## Visão Geral do Projeto
 
-Boilerplate de uma tela de autenticação com JWT desenvolvido com Vue, Vuex, Vue-Router e Axios
+Um sistema de autenticação com Json Web Token desenvolvido com o Vue, Vuex, Vue-Router e Axios
 
 api: https://github.com/emersonv25/Login-JWT-Api-AspNetCore5
 
-### Padrão de Projeto
+
+## Screenshots
+
+* Tela de Login
+<p align="left">
+  <img src="screenshot/Login.png" width="480">
+</p>
+
+* Tela de Registro
+<p align="left">
+  <img src="screenshot/Cadastro.png" width="480">
+</p>
+
+* Home
+<p align="left">
+  <img src="screenshot/Home.png" width="480">
+</p>
+
+* Editar Perfil
+<p align="left">
+  <img src="screenshot/Perfil.png" width="480">
+</p>
+
+* Gerenciar Usuários ADMINISTRADOR
+<p align="left">
+  <img src="screenshot/usuarios.png" width="480">
+</p>
+<p align="left">
+  <img src="screenshot/editaruser.png" width="480">
+</p>
+
+## Padrão de Projeto
 
 *  FLUX (vuex)
 
 
-# Configurando Ambiente de Desenvolvimento e Compilando para produção
+# Configurações
 
 ## Pre-Requisito: 
 
