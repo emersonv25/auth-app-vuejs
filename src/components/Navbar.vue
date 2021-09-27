@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app height="70">
+    <v-app-bar app height="50">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-spacer></v-spacer>
@@ -9,7 +9,7 @@
       <div class="d-flex" style="text-align: end">
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="primary--text">
+            <v-list-item-title >
               <h2 class="font-weight-medium text-left">Login</h2>
               <v-list-item-subtitle>
                 Versão: {{versao}}
