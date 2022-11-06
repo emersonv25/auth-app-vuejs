@@ -1,11 +1,11 @@
-# Login-JWT-VueJs
+# auth-app-vuejs
 
 ## Visão Geral do Projeto
 
 Um sistema de autenticação com Json Web Token desenvolvido com o Vue, Vuex, Vue-Router, Vuetify e Axios
 
-api: https://github.com/emersonv25/Login-JWT-Api-AspNetCore5
-
+api: https://github.com/emersonv25/auth-api-dotnet
+### OBS: Refatorei a api e este projeto acabou ficando desatualizado
 
 ## Screenshots
 
